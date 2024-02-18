@@ -20,10 +20,12 @@ app.use(cookieParser());
 app.use(router);
 
 app.use("/api/blog",express.static(path.join(__dirname,"/uploads")))
-mongoose.connect(process.env.DB_CONNECTION_URL)
+mongoose.connect(process.env.DB_CONNECTION_URL, {
+   useNewUrlParser:true  ,
+  useUnifiedTopology:true })
         .then(()=>console.log("connected to DB............."))
         .catch((e)=>console.log({Error : e.message}))
-
+       
 
 app.all("*", (req, res, next) => {
   res
